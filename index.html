@@ -10,7 +10,7 @@ html, body {
   width:100%;
   height:100%;
   overflow:hidden;
-  background: grey;
+  background: black;
   display:flex;
   flex-direction:column;
 }
@@ -19,7 +19,7 @@ html, body {
   width:100%;
   padding:5px;
   text-align:center;
-  background:#ccc;
+  background:gold;
   z-index:3;
 }
 
@@ -69,9 +69,16 @@ html, body {
   font-size:14px;
   box-sizing:border-box;
 }
+.extra{
+opacity:0.9;
+}
+.schwarz.active {
+  background: rgba(120, 160, 180, 0.85) !important;
+}
+
 
 .active {
-  background: orange !important;
+  background: rgba(195, 177, 225, 0.85) !important;
 }
 
 
@@ -94,6 +101,15 @@ html, body {
 
 <div class="Spielfeld">
 
+<div class="TasteBlock">
+    <div class="Taste weiss extra" data-note="A-1">A-1</div>
+    <div class="Taste schwarz extra" data-note="A#-1">A#-1</div>
+  </div>
+  <div class="TasteBlock">
+    <div class="Taste weiss extra" data-note="B-1">B-1</div>
+    
+  </div>
+  
   <div class="TasteBlock">
     <div class="Taste weiss" data-note="C">C</div>
     <div class="Taste schwarz" data-note="C#">C#</div>
@@ -124,7 +140,15 @@ html, body {
   </div>
 
   <div class="TasteBlock">
-    <div class="Taste weiss" data-note="H">H</div>
+    <div class="Taste weiss" data-note="B">B</div>
+  </div>
+  <div class="TasteBlock">
+    <div class="Taste weiss extra" data-note="C+1">C+1</div>
+    <div class="Taste schwarz extra" data-note="C#+1">C#+1</div>
+  </div>
+  <div class="TasteBlock">
+    <div class="Taste weiss extra" data-note="D+1">D+1</div>
+    
   </div>
 
 </div>
@@ -148,8 +172,8 @@ tasten.forEach(taste => {
 const lessons = {
   lesson1: ["C", "D", "E","F","G","G","A","A","A","A","G","A","A","A","A","G","F","F","F","F","E","E","D","D","D","D","C"],
   lesson2: ["F", "E", "D","A","F", "E", "D","A#","A","G","F","G","F","G","A","F","E","D","G","F","E","D","E","F","D","A","F","G","A#","A","G","A"],
-  lesson3: ["F#","F#","A","F#","A","F#","G#","G#","A","H","E","G#","H","G#","F#"],
-  lesson4: ["G#","H","A","G#","G#","G#","G#","A","G#","F#","F#","F#","F#","G#","F#","F#","E","E","E","D#","C#","D#","E"]
+  lesson3: ["F#","F#","A","F#","A","F#","G#","G#","A","B","E","G#","B","G#","F#"],
+  lesson4: ["G#","B","A","G#","G#","G#","G#","A","G#","F#","F#","F#","F#","G#","F#","F#","E","E","E","D#","C#","D#","E"]
 };
 
 let mode = "free";       // "free" oder "learn"
@@ -175,6 +199,9 @@ document.getElementById("lessonSelect").onchange = e => {
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 const frequenzen = {
+  "A-1": 220.00, 	//tiefer links
+  "A#-1": 233.08,   // tiefer links
+  "B-1": 246.94,    // tiefer links
   C: 261.63,
   "C#": 277.18,
   D: 293.66,
@@ -186,7 +213,11 @@ const frequenzen = {
   "G#": 415.30,
   A: 440.00,
   "A#": 466.16,
-  H: 493.88
+  B: 493.88,
+  "C+1": 523.25,    // höher rechts
+  "C#+1": 554.37,   // schwarze Taste (optional)
+  "D+1": 587.33,     // höher rechts
+ 
 };
 function clearHighlights() {
   document.querySelectorAll(".Taste").forEach(taste => {
@@ -297,4 +328,3 @@ function handleTaste(e) {
 </script>
 </body>
 </html>
-
